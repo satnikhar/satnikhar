@@ -1,8 +1,21 @@
+const express= require('express');
+const path = require('path');
 
-const http = require('http');
+const app = express();
+const pathPublic = path.join(__dirname,'Public');
+app.use(express.static(pathPublic));
 
-http.createServer((req,resp)=>{
-    resp.writeHead(200,{'content-type':'application\json'});
-    resp.write({name:'Satish', email:'sat@gmail.com'})
-}).listen(5000);
+
+app.get('/', (req, resp)=>{
+
+    resp.sendFile(`${pathPublic}/index.html`)
+
+});
+app.get('/about', (req, resp)=>{
+
+    resp.sendFile(`${pathPublic}/about.html`)
+
+});
+
+app.listen(8000);
 
